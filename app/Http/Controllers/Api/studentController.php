@@ -19,7 +19,15 @@ class studentController extends Controller
         // Obtiene todos los estudiantes de la base de datos
         $students = Student::all();
 
-        
+        // Verifica si hay estudiantes en la base de datos
+        if ($students->isEmpty()) {
+            // Si no hay estudiantes, devuelve una respuesta 404 con un mensaje
+            $data = [
+                'message' => 'No se encontraron estudiantes',
+                'status' => 200
+            ];
+            return response()->json($data, 404);
+        }
 
         // Si hay estudiantes, devuelve una respuesta 200 con los datos de los estudiantes
         $data = [
