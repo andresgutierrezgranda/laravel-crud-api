@@ -22,7 +22,7 @@ class StudentFactory extends Factory
             'name' => $this->faker->name(),
             // Añadir aleatoriamente un email
             'email' => $this->faker->email(),
-            // Añadir aleatoriamente teléfono en el formato español de 9 digitos
+            // Añadir aleatoriamente teléfono en el formato de 9 digitos
             'phone' => $this->faker->numerify('#########'),
             // Añadir aleatoriamente un idioma de los siguientes: Spanish, English, French
             'language' => $this->faker->randomElement(['Spanish', 'English', 'French'])
