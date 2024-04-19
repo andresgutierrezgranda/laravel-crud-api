@@ -219,4 +219,75 @@ class studentController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function updatePartial(Request $request, $id){
+        // Valida los datos del request 
+        $validator = Validator::make($request->all(), [
+            'name'     => 'string|max:255',
+            'email'    => 'email|unique:student,email,'.$id,
+            'phone'    => 'digits:9',
+            'language' => 'in:English,Spanish,French'
+        ]);
+
+        // Si la validación falla, devuelve una respuesta 400 con los errores
+        if($validator->fails()){
+            $data = [
+                'message' => 'Error de validación',
+                'errors' => $validator->errors(),
+                'status' => 400
+            ];
+
+            return response()->json($data, 400);
+        }
+        // Encuentra el estudiante con el id dado
+        $student = Student::find($id);
+
+        // Si el estudiante no se encuentra, devuelve una respuesta 404 con un mensaje de error
+        if(!$student){
+            $data = [
+                'message' => 'Estudiante no encontrado',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        if($request->name){
+            $student->update([
+                'name' => $request->name                
+            ]);
+        }
+        if($request->email){
+            $student->update([
+                'email' => $request->email                
+            ]);
+        }
+        if($request->phone){
+            $student->update([
+                'phone' => $request->phone                
+            ]);
+        }
+        if($request->language){
+            $student->update([
+                'language' => $request->language                
+            ]);
+        }
+
+        // Si el estudiante no se pudo actualizar, devuelve una respuesta 500 con un mensaje de error
+        if (!$student) {
+            $data = [
+                'message' => 'Error al actualizar el estudiante',
+                'status' => 500
+            ];
+
+            return response()->json($data, 500);
+            
+        }
+
+        // Si el estudiante se pudo actualizar, devuelve una respuesta 200 con los datos del estudiante
+        $data = [
+            'student' => $student,
+            'status' => 200
+        ];
+
+        return response()->json($data, 200);
+    }
 }
