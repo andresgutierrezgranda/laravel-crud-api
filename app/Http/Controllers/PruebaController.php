@@ -11,9 +11,17 @@ class PruebaController extends Controller
     public function index()
     {
         // Obtener el parámetro 'nombre' de la solicitud
-        $nombre = request('nombre');
+        $nombre = "bbbbbbb";
 
-        // Devolver la vista 'prueba' y pasarle el parámetro 'nombre'
-        return view('prueba', ['nombre' => $nombre]);
+        // Devolver la vista 'hola' y pasarle el parámetro 'nombre'
+        return view('hola', ['message' => $nombre]);
+    }
+    public function create()
+    {
+        // Obtener el parámetro 'nombre' de la solicitud
+        $nombre = "aaaaaaa";
+
+        // Devolver la vista 'hola' y pasarle el parámetro 'nombre'
+        return view('hola', ['message' => $nombre]);
     }
 }

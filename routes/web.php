@@ -20,3 +20,4 @@ Route::get('/hola/{nombre}', function ($nombre) {
 // Ruta que devuelve la vista 'prueba' y cargar el controlador PruebaController
 
 Route::get('prueba/{nombre}', [PruebaController::class, 'index']);
+Route::resource('user', PruebaController::class);
